@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::resource('videos','\App\Http\Controllers\VideoController');
 
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

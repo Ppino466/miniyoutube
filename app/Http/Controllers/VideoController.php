@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Video;
+use Illuminate\Support\Facades\Auth;
 
 class VideoController extends Controller
 {
@@ -14,6 +16,7 @@ class VideoController extends Controller
     public function index()
     {
         //Muestra lo registros
+        $videos = Video::all();
     }
 
     /**
@@ -35,9 +38,37 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        //Guarda un nuevo registro
+        //Guardar un nuevo registro 
+        //Validación de formulario
+        $validateData = $this->validate($request, [
+            'title' => 'required|min:5',
+            'description' => 'required',
+            'video' => 'mimes:mp4'
+        ]);
+        $video = new Video();
+        $user = Auth::user();
+        $video->user_id = $user->id;
+        $video->title = $request->input('title');
+        $video->description = $request->input('description');
+        //Subida de la miniatura
+        $image = $request->file('image');
+        if ($image) {
+            $image_path = time().$image->getClientOriginalName();
+            \Storage::disk('images')->put($image_path, \File::get($image));
+            $video->image = $image_path;
+        }
+        //Subida del video
+        $video_file = $request->file('video');
+        if ($video_file) {
+            $video_path = time().$video_file->getClientOriginalName();
+            \Storage::disk('videos')->put($video_path, \File::get($video_file));
+            $video->video_path = $video_path;
+        }
+        $video->save();
+        return redirect()->route('videos.create')->with(array(
+            'message' => 'El video se ha subido correctamente'
+        ));
     }
-
     /**
      * Display the specified resource.
      *
