@@ -17,7 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('videos','\App\Http\Controllers\VideoController');
+
+Route::resource('videos', '\App\Http\Controllers\VideoController');
 
 
 Route::middleware([
@@ -29,3 +30,11 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/delete-video/{video_id?}', array(
+    'as' => 'delete-video',
+    'middleware' => 'auth',
+    'uses' => '\App\Http\Controllers\VideoController@delete'
+));
+
+Route::name('print')->get('/imprimir', '\App\Http\Controllers\GeneradorController@imprimir');
