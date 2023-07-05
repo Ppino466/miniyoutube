@@ -31,19 +31,20 @@ class VideoController extends Controller
             $ruta = "eliminar".$value['id'];
             $eliminar = route('delete-video', $value['id']);
 
-            $actualizar = '#'; //route('videos.edit', $value['id']);
-            $detalle = '#';  //route('videos.show', $value['id']);
+            $actualizar = route('videos.edit', $value['id']);
+            $detalle = route('videos.show', $value['id']);
             $acciones = '
-                <div class="btn-acciones">
+               
+            <div class="btn-acciones">
                     <div class="btn-circle">
-                        <a href="'.$detalle.'" role="button" class="btn btn-primary" title="Reproducir">
-                            <i class="far fa-play"></i>Mostrar
+                        <a href="'.$detalle.'" role="button" class="btn btn-outline-primary btn-sm" title="Reproducir">
+                            <i class="bi bi-play-btn"></i>
                         </a>
-                        <a href="'.$actualizar.'" role="button" class="btn btn-success" title="Actualizar">
-                            <i class="far fa-edit"></i>Editar
+                        <a href="'.$actualizar.'" role="button" class="btn btn-outline-success btn-sm" title="Actualizar">
+                            <i class="bi bi-pencil"></i>
                         </a>
-                         <a href="#'.$ruta.'" role="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#'.$ruta.'">
-                            <i class="far fa-trash-alt"></i>Eliminar
+                         <a href="#'.$ruta.'" role="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#'.$ruta.'">
+                            <i class="bi bi-trash"></i>
                         </a>
 
                     </div>
@@ -79,14 +80,15 @@ class VideoController extends Controller
                 $miniatura ='';
             }
             $videos[$key] = array(
-                $acciones,
+              
                 $value['id'],
                 $value['title'],
                 $value['description'],
                 $miniatura,
                 $value['video_path'],
                 $value['name'],
-                $value['email']
+                $value['email'],
+                $acciones
             );
 
         }

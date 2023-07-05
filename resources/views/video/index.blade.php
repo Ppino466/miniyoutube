@@ -39,7 +39,7 @@
         <br>
         <p align="right">
             <a href="{{ route('videos.create') }}" style="margin-right:10px;" class="btn btn-success">Capturar Video</a>
-            <a href="{{ route('dashboard') }}" class="btn btn-primary">Regresar</a>
+            <a href="{{ route('dashboard') }}" class="btn btn-danger">Salir</a>
         </p>
         <style>
             .dataTables_wrapper .dataTables_length {
@@ -65,7 +65,7 @@
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th>Acciones</th>
+                    
                     <th>Id Video</th>
                     <th>Título</th>
                     <th>Descripción</th>
@@ -73,6 +73,7 @@
                     <th>Enlace Video</th>
                     <th>Nombre</th>
                     <th>Correo</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -101,17 +102,18 @@
 
     $(document).ready(function() {
         $('#example').DataTable({
-            "data": data,
-            "pageLength": 50,
+            "data": data, 
+            "lengthMenu": [1,2,5],
+            "pageLength": 10,
             "order": [
                 [0, "asc"]
             ],
             "language": {
                 "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar MENU registros",
+                "sLengthMenu": "Mostrar registros",
                 "sZeroRecords": "No se encontraron resultados",
                 "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "Mostrando registros del START al END de un total de TOTAL registros",
+                "sInfo": "Mostrando registros del primero al ultimo de un total de TOTAL registros",
                 "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
                 "sInfoFiltered": "(filtrado de un total de MAX registros)",
                 "sInfoPostFix": "",
@@ -131,8 +133,8 @@
                 }
             },
             responsive: true,
-            // dom: 'Bfrtip',
-            dom: '<"col-xs-3"l><"col-xs-5"B><"col-xs-4"f>rtip',
+           // dom: 'lBfrtip',
+            dom: '<"col-sm-3"l><"col-sm-5"B><"col-sm-4"f>rtip',
             buttons: [
                 'copy', 'excel',
                 {
