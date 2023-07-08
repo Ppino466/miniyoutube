@@ -1,6 +1,13 @@
 @extends('layouts.app')
+@section('style')
+    <style>
+        main {
+            background-image: url('{{ asset('storage/images/1.png') }}');
+        }
+    </style>
+@endsection
 @section('content')
-<div class="container">
+<div class="container" >
     <div class="row">
         <h2 style="color: aliceblue;">Crear un nuevo video</h2>
         <hr>
@@ -34,6 +41,9 @@
             </div>
             <br>
             <button type="submit" class="btn btn-success">Crear Vídeo</button>
+            <br>
+            <h1>.</h1>
+            <h1>.</h1>
         </form>
     </div>
 </div>

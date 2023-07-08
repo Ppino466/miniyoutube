@@ -22,10 +22,9 @@
 <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased" >
         <x-banner />
-
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900" >
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
@@ -38,8 +37,10 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main >
             @yield('content')
+            @yield('style')
+
             </main>
         </div>
 

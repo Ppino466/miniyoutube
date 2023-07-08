@@ -38,3 +38,24 @@ Route::get('/delete-video/{video_id?}', array(
 ));
 
 Route::name('print')->get('/imprimir', '\App\Http\Controllers\GeneradorController@imprimir');
+
+
+Route::get('/editar-video/{video_id}', array(
+    'as' => 'videoEdit',
+    'middleware' => 'auth',
+    'uses' => '\App\Http\Controllers\VideoController@edit'
+ ));
+
+ 
+ Route::post('/update-video/{video_id}',array(
+    'as' => 'updateVideo',
+    'middleware' => 'auth',
+    'uses' => '\App\Http\Controllers\VideoController@update'
+ ));
+
+ Route::get('/video-file/{filename}', array(
+    'as' => 'fileVideo',
+    'uses' => '\App\Http\Controllers\VideoController@getVideo'
+ ));
+ 
+ 
